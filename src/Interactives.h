@@ -14,7 +14,9 @@ typedef enum
     platform,
     bonus,
     mob,
-    charge
+    charge,
+    mouse,
+    live
 }function_enum;
 
 typedef struct

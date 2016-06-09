@@ -21,6 +21,7 @@ addons: &gcc5
     - libboost-all-dev
 before_install:
         - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then bash scripts/travis-osx-setup.sh; fi
+        - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CXX="g++-5" CC="gcc-5"; fi
 script:
     - "mkdir build && cd build && cmake ../ && make && ctest -VV && cd .."
     - "cd docs && ./build-travis.sh && cd .."

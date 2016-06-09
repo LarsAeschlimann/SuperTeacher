@@ -96,6 +96,10 @@ int main(int argc, char *argv[]) {
     std::shared_ptr<sf::Text> score = make_shared<sf::Text>("Points: ", *font, 50);
 
     text.Add_Text(score, sf::Vector2f(-900, -25) + view.GetView().getCenter());
+
+    std::shared_ptr<sf::Text> live = make_shared<sf::Text>("Lives: ", *font, 50);
+
+    text.Add_Text(live, sf::Vector2f(-60, -75) + view.GetView().getCenter());
     
     for (int y = 17;  y >= ground_level; y--) {
         for (int x = 0; x < 32; x++) {
@@ -137,8 +141,12 @@ int main(int argc, char *argv[]) {
         auto tmp_time = Timer::get_time_s();
         timetext->setString("Time: " + to_string(tmp_time) + " sec");
         pencil->setString("Pencils: " + to_string(character.getNbPencil()));
-
-		//high_jump->setString("Jump level " + to_string(character.getJumpLevel()));
+        live->setString("Lives: " + to_string(character.getLive()));
+        if (character.getLive() <= 0)
+        {
+            window.close();
+        }
+		//high_jump->setString("Jump level " + to_string(character.getCharacterLevel()));
         text.update(view.GetView().getCenter());
       
         // Dessin

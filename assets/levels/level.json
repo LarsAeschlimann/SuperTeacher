@@ -1,6 +1,7 @@
 {
     "init":{
-        "pencil" : 100
+        "pencil" : 0,
+        "lives"  : 3
            },
     "background" : {
         "world": {"x":100,"y":60},
@@ -19,7 +20,7 @@
                     {"x": 50,"y": 16,"image":"backgrounds/Paper_stack","size": 0.5,"function":"charge","value":2},
                     {"x": 20.5,"y": 16,"image":"characters/student","size":0.25, "function":"mob","value":1},
                     {"x": 22,"y": 16,"image":"backgrounds/Paper_stack","size": 0.5,"function":"bonus","value":10},
-                    {"x": 12,"y": 16,"image":"backgrounds/Paper_stack","size":1,"function":"platform"},
+                    {"x": 12,"y": 16,"image":"backgrounds/Paper_stack","size":1,"function":"nothing"},
                     {"x": 12,"y": 14,"image":"backgrounds/Paper_stack","size":1,"function":"platform"},
                     {"x": 28,"y": 16,"image":"backgrounds/Paper_stack","size":1,"function":"platform"},
                     {"x": 22,"y": 3,"image":"backgrounds/Paper_stack","size":1,"function":"platform"},
@@ -27,6 +28,7 @@
                     {"x": 30,"y": 1,"image":"backgrounds/Paper_stack","size":1,"function":"platform"},
                     {"x": 23,"y": -1,"image":"backgrounds/Paper_stack","size": 0.5,"function":"charge","value":1},
                     {"x": 45,"y": 16,"image":"characters/student","size":0.25, "function":"mob","value":1},
-                    {"x": 31,"y": -3,"image":"backgrounds/Paper_stack","size": 0.5,"function":"bonus","value":5}
+                    {"x": 31,"y": -3,"image":"backgrounds/Paper_stack","size": 0.5,"function":"bonus","value":5},
+                    {"x": 55,"y": 14,"image":"tests/HUD/hud_heartFull","size": 3,"function":"live","value":1}
                    ]
 }
