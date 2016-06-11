@@ -22,4 +22,4 @@
 #include "Text.h"
 #include "Interactives.h"
 
-void level_execute(level_str* level_info, sf::RenderWindow* window);
+bool level_execute(level_str* level_info, sf::RenderWindow* window);

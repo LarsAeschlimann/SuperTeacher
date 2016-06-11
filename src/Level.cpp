@@ -2,24 +2,25 @@
 
 using namespace std;
 
-void level_execute(level_str* level_info, sf::RenderWindow* window)
+bool level_execute(level_str* level_info, sf::RenderWindow* window)
 {
     auto resource = make_shared<ResourceManager>();
     auto config = resource->get_json("conf.json");
     auto style = sf::Style::Default;
+    bool win = false;
 
-    Ground ground(resource, "level");
+    Ground ground(resource, level_info->name);
     Object people = {};
     Object front_print = {};
-    Interactives interact(resource, "level");
+    Interactives interact(resource, level_info->name);
     int levelJump = 0;
 
-    auto level = resource->get_json("levels/level.json");
+    auto level = resource->get_json("levels/"+ level_info->name+".json");
     View view = (sf::FloatRect(0,
         SCREEN_Y_PXSIZE - ((int)(*level)["background"]["world"]["y"]) * BLOCK_PXSIZE,
         ((int)(*level)["background"]["world"]["x"]) * BLOCK_PXSIZE,
         ((int)(*level)["background"]["world"]["y"]) * BLOCK_PXSIZE));
-    Background background(resource, "level", sf::IntRect(0,
+    Background background(resource, level_info->name, sf::IntRect(0,
         0,
         ((int)(*level)["background"]["world"]["x"]) * BLOCK_PXSIZE,
         ((int)(*level)["background"]["world"]["y"]) * BLOCK_PXSIZE));
@@ -33,18 +34,10 @@ void level_execute(level_str* level_info, sf::RenderWindow* window)
 
     text.Add_Text(timetext, sf::Vector2f(-1500, -25) + view.GetView().getCenter());
 
-    /*if ((bool)(*config)["video"]["fullscreen"]) {
-        style = sf::Style::Fullscreen;
-    }*/
 
     std::array<std::array<int, 18>, 32> ColisionDetect = {};
     const int SOLID = 1;
-    /*sf::RenderWindow window(
-        sf::VideoMode(SCREEN_X_PXSIZE, SCREEN_Y_PXSIZE),
-        "SuperTeacher",
-        style
-        );
-        */
+
     window->setFramerateLimit(50);
     HIManager user_input = { window };
 
@@ -94,11 +87,13 @@ void level_execute(level_str* level_info, sf::RenderWindow* window)
         song->play();
     }
     colision col = { true,true,ground_level*BLOCK_PXSIZE,0 };
-    //auto level_status = 
- //   while (window->isOpen()) {
     while (!level_info->end)
     {
-        *level_info = interact.update(character, score, ground_level*BLOCK_PXSIZE, &col);
+        *level_info = interact.update(character, score, ground_level*BLOCK_PXSIZE, &col,&level_info->score);
+        if (level_info->end && level_info->live > 0)
+        {
+            win = true;
+        }
         user_input.process();
         
         character.write_collision(col);
@@ -112,11 +107,7 @@ void level_execute(level_str* level_info, sf::RenderWindow* window)
         timetext->setString("Time: " + to_string(tmp_time) + " sec");
         pencil->setString("Pencils: " + to_string(character.getNbPencil()));
         live->setString("Lives: " + to_string(character.getLive()));
-        /*if (level_status.end)//(character.getLive() <= 0)
-        {
-            window->close();
-        }*/
-        //high_jump->setString("Jump level " + to_string(character.getCharacterLevel()));
+
         text.update(view.GetView().getCenter());
 
         // Dessin
@@ -149,4 +140,5 @@ void level_execute(level_str* level_info, sf::RenderWindow* window)
         window->clear();
     }
     user_input.HIEvent_sig.disconnect_all_slots();
+    return win;
 }

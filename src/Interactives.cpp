@@ -114,13 +114,13 @@ Interactives::Interactives(std::shared_ptr<ResourceManager> resource, std::strin
 }
 
 
-level_str Interactives::update(Character& mainPerson, std::shared_ptr<sf::Text> score, int GroundLevel,colision *col)
+level_str Interactives::update(Character& mainPerson, std::shared_ptr<sf::Text> score, int GroundLevel,colision *col, int *points)
 {
     //static colision col = {true,true,GroundLevel,0};
     level_str level;
     static float val = 0;
     val += 0.2;
-    static int points = 0;
+    //static int points = startscore;
     bool no_col = true;
     bool del_pack = false;
     bool del_pen = false;
@@ -220,7 +220,7 @@ level_str Interactives::update(Character& mainPerson, std::shared_ptr<sf::Text> 
             pack->sprite->setScale(pack->scale + (pack->scale*sin(val/FLASH_SPEED_FACTOR) / FLASH_SIZE_FACTOR), pack->scale + (pack->scale*sin(val/FLASH_SPEED_FACTOR) / FLASH_SPEED_FACTOR));
             if (rect.intersects(pack->sprite->getGlobalBounds()))
             {
-                points += pack->value;
+                *points += pack->value;
                 pack->deleteFlag = true;
                 del_pack = true;
             }
@@ -244,7 +244,7 @@ level_str Interactives::update(Character& mainPerson, std::shared_ptr<sf::Text> 
             {
                 if (pack->use == false)
                 {
-                    points -= pack->value;
+                    *points -= pack->value;
                     mainPerson.addLive(-pack->value);
                     if (mainPerson.getLive() <= 0)
                     {
@@ -347,8 +347,8 @@ level_str Interactives::update(Character& mainPerson, std::shared_ptr<sf::Text> 
         col.right_enable = true;
         col.walk_level = 658 - (BLOCK_PXSIZE * ((SCREEN_Y_BLOCKS)-16));
     }*/
-    score->setString("Points: " + std::to_string(points));
-    level.score = points;
+    score->setString("Points: " + std::to_string(*points));
+    level.score = *points;
     level.live = mainPerson.getLive();
     level.pencil = mainPerson.getNbPencil();
     return level;

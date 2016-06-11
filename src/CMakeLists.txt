@@ -44,7 +44,8 @@ add_executable(superteacher
 		Text.cpp Text.h
 		Interactives.cpp Interactives.h
         Pencil.cpp Pencil.h
-		Level.cpp Level.h)
+		Level.cpp Level.h
+		Menu.cpp Menu.h)
 
 
 add_dependencies(superteacher JSON)
