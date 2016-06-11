@@ -16,8 +16,18 @@ typedef enum
     mob,
     charge,
     mouse,
-    live
+    live,
+    end
 }function_enum;
+
+typedef struct
+{
+    bool end;
+    int score;
+    int live;
+    int pencil;
+    std::string name;
+}level_str;
 
 typedef struct
 {
@@ -32,7 +42,7 @@ typedef struct
 class Interactives : public Object {
 public:
     Interactives(std::shared_ptr<ResourceManager> ressource, std::string level_name);
-    colision update(Character& mainPerson, std::shared_ptr<sf::Text> score, int GroundLevel);
+    level_str update(Character& mainPerson, std::shared_ptr<sf::Text> score, int GroundLevel,colision* col);
     //colision update( sf::FloatRect rect, std::shared_ptr<sf::Text> score);
     std::vector<std::shared_ptr<sf::Drawable>> get_drawables(void);
 private:

@@ -38,6 +38,10 @@ function_enum string_conv(std::string text)
     {
         convert_val = mouse;
     }
+    if (text == "end")
+    {
+        convert_val = end;
+    }
     return convert_val;
 }
 
@@ -48,16 +52,15 @@ Interactives::Interactives(std::shared_ptr<ResourceManager> resource, std::strin
     auto level = m_resource->get_json("levels/" + level_name + ".json");
 
     auto objects = (*level)["interactive"];
-    
     for (auto object : objects) {
         auto sprite = std::make_shared<act_pack>();
         sprite->function = string_conv(object["function"]);
         auto temp = std::make_shared<sf::Sprite>();
+        std::string name = object["image"];
+        auto texture = m_resource->get_texture("graphics/" + name + ".png");
+        temp->setTexture(*texture);
         if (sprite->function != mouse)
         {
-            std::string name = object["image"];
-            auto texture = m_resource->get_texture("graphics/" + name + ".png");
-            temp->setTexture(*texture);
             float x = object["x"];
             float y = object["y"];
             temp->setScale(object["size"], object["size"]);
@@ -66,9 +69,6 @@ Interactives::Interactives(std::shared_ptr<ResourceManager> resource, std::strin
         }
         else
         {
-            std::string name = object["image"];
-            auto texture = m_resource->get_texture("graphics/" + name + ".png");
-            temp->setTexture(*texture);
             temp->setTextureRect(sf::IntRect(0, 0, 10, 10));
             temp->setColor(sf::Color::Green);
         }
@@ -87,12 +87,37 @@ Interactives::Interactives(std::shared_ptr<ResourceManager> resource, std::strin
         m_sprites.push_back(sprite);
         //add_drawable(sprite->sprite);
     }
+    auto sprite1 = std::make_shared<act_pack>();
+    auto temp1 = std::make_shared<sf::Sprite>();
+    auto texture = m_resource->get_texture("graphics/interactives/blanc.png");
+    temp1->setTexture(*texture);
+    sprite1->sprite = temp1;
+    sprite1->sprite->setTextureRect(sf::IntRect(0, 0, SECUR_SPACE, ((int)(*level)["background"]["world"]["y"])*BLOCK_PXSIZE+SECUR_SPACE*10));
+    sprite1->function = platform;
+    sprite1->use = false;
+    sprite1->value = 0;
+    sprite1->deleteFlag = false;
+    sprite1->sprite->setPosition(-SECUR_SPACE, -SCREEN_Y_PXSIZE - SECUR_SPACE * 10);
+    m_sprites.push_back(sprite1);
+    auto sprite2 = std::make_shared<act_pack>();
+    auto temp2 = std::make_shared<sf::Sprite>();
+    temp2->setTexture(*texture);
+    sprite2->sprite = temp2;
+    sprite2->sprite->setTextureRect(sf::IntRect(0, 0, SECUR_SPACE, ((int)(*level)["background"]["world"]["y"])*BLOCK_PXSIZE + SECUR_SPACE * 10));
+    sprite2->function = platform;
+    sprite2->use = false;
+    sprite2->value = 0;
+    sprite2->deleteFlag = false;
+    sprite2->sprite->setPosition(((int)(*level)["background"]["world"]["x"])*BLOCK_PXSIZE, -SCREEN_Y_PXSIZE - SECUR_SPACE * 10);
+    m_sprites.push_back(sprite2);
+
 }
 
 
-colision Interactives::update(Character& mainPerson, std::shared_ptr<sf::Text> score, int GroundLevel)
+level_str Interactives::update(Character& mainPerson, std::shared_ptr<sf::Text> score, int GroundLevel,colision *col)
 {
-    static colision col = {true,true,GroundLevel,0};
+    //static colision col = {true,true,GroundLevel,0};
+    level_str level;
     static float val = 0;
     val += 0.2;
     static int points = 0;
@@ -105,10 +130,11 @@ colision Interactives::update(Character& mainPerson, std::shared_ptr<sf::Text> s
     auto pencil = mainPerson.getPencil();
     //void *supp = NULL;
     //col.walk_level = GroundLevel;//658 - (BLOCK_PXSIZE * ((SCREEN_Y_BLOCKS)-16));
-    col.right_enable = true;
-    col.left_enable = true;
-    col.x_move = 0;
-    if (col.walk_level == mainPerson.getCharacterLevel())
+    col->right_enable = true;
+    col->left_enable = true;
+    col->x_move = 0;
+    level.end = false;
+    if (col->walk_level == mainPerson.getCharacterLevel())
     {
         fly = false;
     }
@@ -116,7 +142,7 @@ colision Interactives::update(Character& mainPerson, std::shared_ptr<sf::Text> s
     {
         fly = true;
     }
-    col.walk_level = GroundLevel;
+    col->walk_level = GroundLevel;
     for (auto& pack : m_sprites)
     {
         if (pack->sprite->getGlobalBounds().intersects(sf::Rect<float>(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y, 1, 1)) &&
@@ -136,27 +162,27 @@ colision Interactives::update(Character& mainPerson, std::shared_ptr<sf::Text> s
                     //rect.left < pack->sprite->getGlobalBounds().left+pack->sprite->getGlobalBounds().width - 10 &&
                     //rect.left + rect.width > pack->sprite->getGlobalBounds().left + 10))
                 {
-                    col.walk_level = pack->sprite->getGlobalBounds().top+1;// - rect.height + 1;
+                    col->walk_level = pack->sprite->getGlobalBounds().top+1;// - rect.height + 1;
                     if (rect.left + rect.width < pack->sprite->getGlobalBounds().left + SECUR_SPACE)
                     { 
                         if (!fly)
                         {
-                            col.x_move = pack->sprite->getGlobalBounds().left - (rect.left + rect.width+SECUR_SPACE);//SECUR_SPACE;
+                            col->x_move = pack->sprite->getGlobalBounds().left - (rect.left + rect.width+SECUR_SPACE);//SECUR_SPACE;
                         }
                         else
                         {
-                            col.x_move = SECUR_SPACE*2;
+                            col->x_move = SECUR_SPACE*2;
                         }
                     }
                     else if (rect.left > pack->sprite->getGlobalBounds().left +pack->sprite->getGlobalBounds().width -SECUR_SPACE)
                     {
                         if (!fly)
                         {
-                            col.x_move = pack->sprite->getGlobalBounds().left - rect.left + pack->sprite->getGlobalBounds().width;
+                            col->x_move = pack->sprite->getGlobalBounds().left - rect.left + pack->sprite->getGlobalBounds().width;
                         }
                         else
                         {
-                            col.x_move = -SECUR_SPACE;
+                            col->x_move = -SECUR_SPACE;
                         }
                     }
                 }
@@ -165,15 +191,15 @@ colision Interactives::update(Character& mainPerson, std::shared_ptr<sf::Text> s
                     (rect.top + rect.height) > pack->sprite->getGlobalBounds().top + SECUR_SPACE)// &&
                     //(rect.top + rect.height) < pack->sprite->getGlobalBounds().top + SECUR_SPACE)
                 {
-                    col.x_move =  pack->sprite->getGlobalBounds().left-(rect.left + rect.width);
-                    col.left_enable = false;
+                    col->x_move =  pack->sprite->getGlobalBounds().left-(rect.left + rect.width);
+                    col->left_enable = false;
                 }
                 else if (rect.left > pack->sprite->getGlobalBounds().left - pack->sprite->getGlobalBounds().width / 2 + pack->sprite->getGlobalBounds().width &&
                     (rect.top + rect.height) > pack->sprite->getGlobalBounds().top + SECUR_SPACE) //&&
                     //(rect.top + rect.height) < pack->sprite->getGlobalBounds().top + SECUR_SPACE)
                 {
-                    col.x_move = pack->sprite->getGlobalBounds().left - rect.left +  pack->sprite->getGlobalBounds().width;
-                    col.right_enable = false;
+                    col->x_move = pack->sprite->getGlobalBounds().left - rect.left +  pack->sprite->getGlobalBounds().width;
+                    col->right_enable = false;
                 }
                 /*else if (rect.left + rect.width / 2 >= pack->sprite->getGlobalBounds().left + pack->sprite->getGlobalBounds().width / 2&&
                          (rect.top + rect.height) > pack->sprite->getGlobalBounds().top + SECUR_SPACE)
@@ -220,6 +246,10 @@ colision Interactives::update(Character& mainPerson, std::shared_ptr<sf::Text> s
                 {
                     points -= pack->value;
                     mainPerson.addLive(-pack->value);
+                    if (mainPerson.getLive() <= 0)
+                    {
+                        level.end = true;
+                    }
                 }
                 pack->use = true;
             }
@@ -276,6 +306,13 @@ colision Interactives::update(Character& mainPerson, std::shared_ptr<sf::Text> s
                 del_pack = true;
             }
         }
+        if (pack->function == end)
+        {
+            if (rect.intersects(pack->sprite->getGlobalBounds()))
+            {
+                level.end = true;
+            }
+        }
         for (auto& pen : pencil)
         {
             if (pen.get_rectangle().intersects(pack->sprite->getGlobalBounds()))
@@ -311,7 +348,10 @@ colision Interactives::update(Character& mainPerson, std::shared_ptr<sf::Text> s
         col.walk_level = 658 - (BLOCK_PXSIZE * ((SCREEN_Y_BLOCKS)-16));
     }*/
     score->setString("Points: " + std::to_string(points));
-    return col;
+    level.score = points;
+    level.live = mainPerson.getLive();
+    level.pencil = mainPerson.getNbPencil();
+    return level;
 }
 
 std::vector<std::shared_ptr<sf::Drawable>> Interactives::get_drawables(void)
