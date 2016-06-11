@@ -118,14 +118,14 @@ Interactives::Interactives(std::shared_ptr<ResourceManager> resource, std::strin
     sprite2->deleteFlag = false;
     sprite2->sprite->setPosition(((int)(*level)["background"]["world"]["x"])*BLOCK_PXSIZE, -SCREEN_Y_PXSIZE - SECUR_SPACE * 10);
     m_sprites.push_back(sprite2);
-
+    val = 0;
 }
 
 
 level_str Interactives::update(Character& mainPerson, std::shared_ptr<sf::Text> score, int GroundLevel,colision *col, int *points)
 {
     level_str level;
-    static float val = 0;
+    //static float val = 0;
     val += 0.2;
     bool no_col = true;
     bool del_pack = false;
@@ -293,21 +293,24 @@ level_str Interactives::update(Character& mainPerson, std::shared_ptr<sf::Text> 
                 level.end = true;
             }
         }
-        for (auto& pen : pencil)
+        if (pack->function != live && pack->function != bonus && pack->function != charge)
         {
-            if (pen.get_rectangle().intersects(pack->sprite->getGlobalBounds()))
+            for (auto& pen : pencil)
             {
-                del_pen = true;
+                if (pen.get_rectangle().intersects(pack->sprite->getGlobalBounds()))
+                {
+                    del_pen = true;
+                }
             }
+            if (del_pen)
+            {
+                pencil.erase(std::remove_if(
+                    pencil.begin(),
+                    pencil.end(),
+                    [pack](auto pen) {return pen.get_rectangle().intersects(pack->sprite->getGlobalBounds()); }));
+            }
+            del_pen = false;
         }
-        if (del_pen)
-        {
-            pencil.erase(std::remove_if(
-                pencil.begin(),
-                pencil.end(),
-                [pack](auto pen) {return pen.get_rectangle().intersects(pack->sprite->getGlobalBounds()); }));
-        }
-        del_pen = false;
         
     }
     mainPerson.setPencil(pencil);

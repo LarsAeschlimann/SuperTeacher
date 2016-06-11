@@ -58,6 +58,7 @@ int main(int argc, char *argv[]) {
     view.setCenter(sf::Vector2f(SCREEN_X_PXSIZE / 2, SCREEN_Y_PXSIZE / 2));
     view.setSize(sf::Vector2f(SCREEN_X_PXSIZE, SCREEN_Y_PXSIZE));
     auto main_menu = Menu(resource);
+    window.setKeyRepeatEnabled(false);
 
     HIManager user_input = { &window };
     user_input.HIEvent_sig.connect([&window,&level_info,&view](HIEvent event)->void{

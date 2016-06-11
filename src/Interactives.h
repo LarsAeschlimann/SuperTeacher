@@ -49,4 +49,5 @@ public:
 private:
     std::shared_ptr<ResourceManager> m_resource;
     std::vector<std::shared_ptr<act_pack>> m_sprites;
+    float val;
 };
