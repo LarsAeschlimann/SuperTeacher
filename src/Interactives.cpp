@@ -138,7 +138,7 @@ level_str Interactives::update(Character& mainPerson, std::shared_ptr<sf::Text> 
     col->left_enable = true;
     col->x_move = 0;
     level.end = false;
-    if (col->walk_level == mainPerson.getCharacterLevel())
+    if (col->walk_level <= mainPerson.getCharacterLevel())
     {
         fly = false;
     }

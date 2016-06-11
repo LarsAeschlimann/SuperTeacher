@@ -50,7 +50,7 @@ void jump_manager(std::shared_ptr<sf::Sprite> sprite, float GroundLevel,int vite
     
 	if ((posy- posy_m_un)+ sprite->getPosition().y >= GroundLevel)
     {
-        posy = GroundLevel - (sprite->getPosition().y - posy_m_un);
+        posy = GroundLevel - (sprite->getPosition().y - posy_m_un)+1;
     }
 	sprite->move(0, (posy - posy_m_un));
 	posy_m_un = posy;

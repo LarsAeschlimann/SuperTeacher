@@ -57,7 +57,7 @@ void Character::process_event(HIEvent event){
                 move_step = 0;
                 flag1 = false;
             }
-            if(m_animation->getPosition().y == colisi.walk_level)
+            if(m_animation->getPosition().y >= colisi.walk_level)
             {
                 m_animation->setTextureRect(sf::IntRect(move_step * 670, 1150 + 100,700,1100));
                 counter++;
@@ -95,7 +95,7 @@ void Character::process_event(HIEvent event){
                 move_step = 0;
                 flag1 = true;
             }
-            if(m_animation->getPosition().y == colisi.walk_level)
+            if(m_animation->getPosition().y >= colisi.walk_level)
             {
                 m_animation->setTextureRect(sf::IntRect(move_step * 660,100,700,1100));
                 counter++;
@@ -145,7 +145,7 @@ void Character::process_event(HIEvent event){
             }
             break;
         case HIEvent::KEY_UP:
-            if(m_animation->getPosition().y == colisi.walk_level)
+            if(m_animation->getPosition().y >= colisi.walk_level)
             {
                 if(flag1)
                 {
