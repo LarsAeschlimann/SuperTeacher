@@ -31,4 +31,6 @@ public:
 
 private:
     std::vector<std::shared_ptr<Button>> buttons;
+
+    std::shared_ptr<sf::Music> song;
 };

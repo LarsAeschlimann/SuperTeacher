@@ -28,6 +28,7 @@ bool level_execute(level_str* level_info, sf::RenderWindow* window)
     auto song = resource->get_music(SONG_1);
     int ground_level = (*level)["ground"]["level"];
 
+    song->setLoop(true);
     Text text((string)"SuperTeacher", sf::Vector2f(-60, -25) + view.GetView().getCenter(), font);
 
     std::shared_ptr<sf::Text> timetext = make_shared<sf::Text>("Clock: " + to_string(Timer::get_time_ms()), *font, 100);

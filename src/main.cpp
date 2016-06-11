@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
     auto resource = make_shared<ResourceManager>();
     auto config = resource->get_json("conf.json");
     auto style = sf::Style::Default;
-
+    
     if((bool)(*config)["video"]["fullscreen"]){
         style = sf::Style::Fullscreen;
     }
@@ -74,6 +74,7 @@ int main(int argc, char *argv[]) {
 
     while (window.isOpen())
     {
+        
         window.clear();
         main_menu.update(level_info,&window);
         window.setView(view);

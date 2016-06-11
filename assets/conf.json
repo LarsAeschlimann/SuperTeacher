@@ -2,7 +2,7 @@
   "video" : {
     "fullscreen" : true
   },
-    "audio": false,
+    "audio": true,
   "level_names":[
     "level"
      ],

@@ -5,6 +5,10 @@
 
 Menu::Menu(std::shared_ptr<ResourceManager> resource)
 {
+
+    song = resource->get_music(SONG_MENU);
+    song->setLoop(true);
+    song->play();
     auto menu = resource->get_json("levels/menu.json");
 
     for (auto but : (*menu)["button"])
@@ -82,7 +86,7 @@ void Menu::process_event_menu(HIEvent events, std::shared_ptr<const json> config
                     level_info->name = temp;
                     level_info->end = false;
                     level_str temp_level = *level_info;
-                    
+                    song->stop();
                     if (level_execute(&temp_level, window))
                     {
                         *level_info = temp_level;
@@ -101,12 +105,15 @@ void Menu::process_event_menu(HIEvent events, std::shared_ptr<const json> config
                             level_info->live = 0;
                         }
                     }
+                    song->play();
                 }
                 if (button->function == "restart")
                 {
                     level_num = 0;
                     *level_info = { false,0,0,0,(*config)["level_names"][level_num] };
+                    song->stop();
                     level_execute(level_info, window);
+                    song->play();
                     if (level_info->live > 0)
                     {
                         level_num++;
