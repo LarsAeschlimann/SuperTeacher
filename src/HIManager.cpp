@@ -41,6 +41,10 @@ void HIManager::process(void) {
                         HIEvent_sig(HIEvent::FAST_UP);
                         FlagUse = 0;
                     }
+                    else
+                    {
+                        HIEvent_sig(HIEvent::KEY_UP);
+                    }
                     break;
                 case sf::Event::MouseButtonPressed:
                     HIEvent_sig(HIEvent::MOUSE_DOWN);

@@ -30,7 +30,7 @@ Character::Character(std::shared_ptr<ResourceManager> resource, std::string leve
     m_animation->setTexture(*animation_texture);
     animation_texture->setSmooth(true);
     m_animation->setScale(0.4, 0.4);
-    m_animation->setOrigin(0, colisi.walk_level);// m_animation->getGlobalBounds().height);// +BLOCK_PXSIZE); // TROUVER D'OU VIENT LE BLOCK DE DECALAGE, ET ENLEVER CELUI-CI
+    m_animation->setOrigin(0, colisi.walk_level);
     m_animation->move(10,colisi.walk_level);
     m_animation->setTextureRect(sf::IntRect(0 * 660,  100, 700, 1100));
     /*
@@ -51,6 +51,7 @@ Character::Character(std::shared_ptr<ResourceManager> resource, std::string leve
     add_drawable(m_animation);
     jumpLevel = JUMP;
     m_nb_pencils = 0;
+    flag1 = true;
 }
 
 void Character::process_event(HIEvent event){
@@ -58,7 +59,7 @@ void Character::process_event(HIEvent event){
     static sf::Vector2i source(0,0);
     static int counter1 = 0;
     static int flag = 0;
-    static int flag1 = 1;
+    //static int flag1 = 1;
     static int flag2 = 0;
     static int collisionflag1 = 0;
     static int collisionflag2 = 0;
@@ -80,7 +81,7 @@ void Character::process_event(HIEvent event){
             {
                 source.x = 0;
                 flag2 = 1;
-                flag1 = 0;
+                flag1 = false;
             }
             if(m_animation->getPosition().y == colisi.walk_level)
             /*{
@@ -132,7 +133,7 @@ void Character::process_event(HIEvent event){
             if (flag1 == 0)
             {
                 source.x = 0;
-                flag1 = 1;
+                flag1 = true;
                 flag2 = 0;
             }
             if(m_animation->getPosition().y == colisi.walk_level)
@@ -169,7 +170,7 @@ void Character::process_event(HIEvent event){
             
             jump_manager(m_animation, colisi.walk_level, -jumpLevel, 0);
             flag = 1;
-            if(flag1 == 1)
+            if(flag1)
             {
                 m_animation->setTextureRect(sf::IntRect(9 * 590,source.y + 80,900,1120));
             }
@@ -188,10 +189,10 @@ void Character::process_event(HIEvent event){
         case HIEvent::THROW:
             if (m_nb_pencils > 0)
             {
-                posy = get_rectangle().top + get_rectangle().height / 2.0;
+                posy = get_rectangle().top + get_rectangle().height / 2.0-THROW_LEVEL;
                 posx = get_rectangle().left + get_rectangle().width / 2.0;
                 m_pencils.push_back(Pencil(m_resource, posx, posy, direction));
-                if (flag1 == 1)
+                if (flag1)
                 {
                     m_animation->setTextureRect(sf::IntRect(0 * 660, source.y + 100, 700, 1100));
                 }
@@ -203,11 +204,11 @@ void Character::process_event(HIEvent event){
                 m_nb_pencils--;
             }
             break;
-        default:
+        case HIEvent::KEY_UP:
             if(m_animation->getPosition().y == colisi.walk_level)
             {
                 flag = 0;
-                if(flag1 == 1)
+                if(flag1)
                 {
                     m_animation->setTextureRect(sf::IntRect(0 * 660,source.y + 100,700,1100));
                 }
@@ -218,6 +219,8 @@ void Character::process_event(HIEvent event){
                 }
             }
             break;
+        default:
+            break;
     }
 }
 
@@ -226,13 +229,20 @@ void Character::process_event(HIEvent event){
 void Character::update()
 {
     int collisionflag3 = 0;
-   /* if(!get_rectangle().intersects(m_student_animation->getGlobalBounds()))
-    {
-        collisionflag3 = 0;
-    }
-    */
     m_animation->move(colisi.x_move, 0);
+    int y_moins1 = m_animation->getPosition().y;
     jump_manager(m_animation, colisi.walk_level, 0,collisionflag3);
+    if (m_animation->getPosition().y >= colisi.walk_level && y_moins1 < colisi.walk_level)
+    {
+        if (flag1)
+        {
+            m_animation->setTextureRect(sf::IntRect(0 * 660,  100, 700, 1100));
+        }
+        else
+        {
+            m_animation->setTextureRect(sf::IntRect(0 * 670,  1150 + 100, 700, 1100));
+        }
+    }
     
     for (auto p : m_pencils){
         p.update();

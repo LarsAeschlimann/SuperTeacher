@@ -43,5 +43,6 @@ private:
     int m_nb_pencils;
     int m_live;
     int jumpLevel;
-    int MINLEVEL;    
+    int MINLEVEL;
+    bool flag1;
 };
