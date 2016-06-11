@@ -37,6 +37,7 @@ typedef struct
     bool deleteFlag;
     int value;
     float scale;
+    sf::FloatRect Transform;
 }act_pack;
 
 class Interactives : public Object {

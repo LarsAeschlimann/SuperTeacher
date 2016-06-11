@@ -18,36 +18,18 @@ Character::Character(std::shared_ptr<ResourceManager> resource, std::string leve
     m_resource = resource;
     auto level = m_resource->get_json("levels/" + level_name + ".json");
     
-    auto superteacher_texture = resource->get_texture("graphics/characters/superteacher.png");
-    m_superteacher = std::make_shared<sf::Sprite>();
-    m_superteacher->setTexture(*superteacher_texture);
-    colisi.walk_level = GroundLevel*BLOCK_PXSIZE;//658 - ( BLOCK_PXSIZE * ((SCREEN_Y_BLOCKS) - (int)(*level)["ground"]["level"] ));
-    //m_superteacher->move(0,colisi.walk_level);
+    colisi.walk_level = GroundLevel*BLOCK_PXSIZE;
     
     m_live = ((int)(*level)["init"]["lives"]);
     auto animation_texture = resource->get_texture("graphics/characters/spritefile.png");
     m_animation = std::make_shared<sf::Sprite>();
     m_animation->setTexture(*animation_texture);
     animation_texture->setSmooth(true);
-    m_animation->setScale(0.4, 0.4);
-    m_animation->setOrigin(0, colisi.walk_level);
-    m_animation->move(10,colisi.walk_level);
+    m_animation->setScale((float)0.4, (float)0.4);
+    m_animation->setOrigin((float)0, (float)colisi.walk_level);
+    m_animation->move((float)10, (float)colisi.walk_level);
     m_animation->setTextureRect(sf::IntRect(0 * 660,  100, 700, 1100));
-    /*
-    auto animation_student_texture = resource->get_texture("graphics/characters/student.png");
-    m_student_animation = std::make_shared<sf::Sprite>();
-    m_student_animation->setTexture(*animation_student_texture);
-    animation_texture->setSmooth(true);
-    m_student_animation->move(800,colisi.walk_level);
-    m_student_animation->setScale(0.25, 0.25);
-    
-    auto transparent_texture = resource->get_texture("graphics/characters/transparent.png");
-    m_transparent = std::make_shared<sf::Sprite>();
-    m_transparent->setTexture(*transparent_texture);
-    
-    static sf::Vector2i source(0,0);
-    m_animation->setTextureRect(sf::IntRect(source.x * 660,source.y,700,1200));
-   */
+
     add_drawable(m_animation);
     jumpLevel = JUMP;
     m_nb_pencils = 0;
@@ -56,13 +38,8 @@ Character::Character(std::shared_ptr<ResourceManager> resource, std::string leve
 
 void Character::process_event(HIEvent event){
 
-    static sf::Vector2i source(0,0);
-    static int counter1 = 0;
-    static int flag = 0;
-    //static int flag1 = 1;
-    static int flag2 = 0;
-    static int collisionflag1 = 0;
-    static int collisionflag2 = 0;
+    static int move_step = 0;
+    static int counter = 0;
     float posx;
     float posy;
     static int speed = SPEED;
@@ -73,45 +50,30 @@ void Character::process_event(HIEvent event){
             direction = -1;
             if(colisi.left_enable)
             {
-                m_animation->move(-speed,0);
-                collisionflag1 = 0;
-                collisionflag2 = 1;
+                m_animation->move((float)-speed, (float)0);
             }
-            if (flag2 == 0)
+            if (flag1)
             {
-                source.x = 0;
-                flag2 = 1;
+                move_step = 0;
                 flag1 = false;
             }
             if(m_animation->getPosition().y == colisi.walk_level)
-            /*{
-                flag = 0;
-            }
-            if(flag == 0)*/
             {
-                /*if (flag2 == 0)
+                m_animation->setTextureRect(sf::IntRect(move_step * 670, 1150 + 100,700,1100));
+                counter++;
+                if(counter >= 25/speed)
                 {
-                    source.x = 0;
-                    flag2 = 1;
-                    flag1 = 0;
-                }*/
-                source.y = 1;
-                m_animation->setTextureRect(sf::IntRect(source.x * 670,source.y * 1150 + 100,700,1100));
-                counter1++;
-                if(counter1 >= 25/speed)
-                {
-                    source.x++;
-                    counter1 = 0;
+                    move_step++;
+                    counter = 0;
                 }
-                if(source.x >= 8)
+                if(move_step >= 8)
                 {
-                    source.x = 0;
+                    move_step = 0;
                 }
             }
             else
             {
-                source.y = 1;
-                m_animation->setTextureRect(sf::IntRect(8 * 676,source.y * 1150 + 80,900,1120));
+                m_animation->setTextureRect(sf::IntRect(8 * 676, 1150 + 80,900,1120));
             }
             break;
         case HIEvent::FAST_DOWN:
@@ -126,80 +88,58 @@ void Character::process_event(HIEvent event){
             direction = 1;
             if(colisi.right_enable)
             {
-                m_animation->move(speed,0);
-                collisionflag1 = 1;
-                collisionflag2 = 0;
+                m_animation->move((float)speed, (float)0);
             }
-            if (flag1 == 0)
+            if (!flag1)
             {
-                source.x = 0;
+                move_step = 0;
                 flag1 = true;
-                flag2 = 0;
             }
             if(m_animation->getPosition().y == colisi.walk_level)
-            /*{
-                flag = 0;
-            }
-            if(flag == 0)*/
             {
-                /*if(flag1 == 0)
+                m_animation->setTextureRect(sf::IntRect(move_step * 660,100,700,1100));
+                counter++;
+                if(counter >= 25/speed)
                 {
-                    source.x = 0;
-                    flag1 = 1;
-                    flag2 = 0;
-                }*/
-                m_animation->setTextureRect(sf::IntRect(source.x * 660,source.y+100,700,1100));
-                counter1++;
-                if(counter1 >= 25/speed)
-                {
-                    source.x++;
-                    counter1 = 0;
+                    move_step++;
+                    counter = 0;
                 }
-                if(source.x >= 8)
+                if(move_step >= 8)
                 {
-                    source.x = 0;
+                    move_step = 0;
                 }
             }
             else
             {
-                m_animation->setTextureRect(sf::IntRect(9 * 590,source.y + 80,900,1120));
+                m_animation->setTextureRect(sf::IntRect(9 * 590, 80,900,1120));
             }
             break;
 
         case HIEvent::JUMP:
             
-            jump_manager(m_animation, colisi.walk_level, -jumpLevel, 0);
-            flag = 1;
+            jump_manager(m_animation, (float)colisi.walk_level, -jumpLevel);
             if(flag1)
             {
-                m_animation->setTextureRect(sf::IntRect(9 * 590,source.y + 80,900,1120));
+                m_animation->setTextureRect(sf::IntRect(9 * 590, 80,900,1120));
             }
             else
             {
-                source.y = 1;
-                m_animation->setTextureRect(sf::IntRect(8 * 676,source.y * 1150 + 80,900,1120));
+                m_animation->setTextureRect(sf::IntRect(8 * 676, 1150 + 80,900,1120));
             }
-            break;
-        case HIEvent::GO_UP:
-            //jumpLevel--;
-            break;
-        case HIEvent::GO_DOWN:
-            //jumpLevel++;
             break;
         case HIEvent::THROW:
             if (m_nb_pencils > 0)
             {
-                posy = get_rectangle().top + get_rectangle().height / 2.0-THROW_LEVEL;
-                posx = get_rectangle().left + get_rectangle().width / 2.0;
+                posy = (float)(get_rectangle().top + get_rectangle().height / 2.0-THROW_LEVEL);
+                posx = (float)(get_rectangle().left + get_rectangle().width / 2.0);
                 m_pencils.push_back(Pencil(m_resource, posx, posy, direction));
                 if (flag1)
                 {
-                    m_animation->setTextureRect(sf::IntRect(0 * 660, source.y + 100, 700, 1100));
+                    m_animation->setTextureRect(sf::IntRect(0 * 660,  100, 700, 1100));
                 }
                 else
                 {
-                    source.y = 1;
-                    m_animation->setTextureRect(sf::IntRect(0 * 670, source.y * 1150 + 100, 700, 1100));
+                    m_animation->setTextureRect(sf::IntRect(0 * 670,  1150 + 100, 700, 1100));
                 }
                 m_nb_pencils--;
             }
@@ -207,15 +147,13 @@ void Character::process_event(HIEvent event){
         case HIEvent::KEY_UP:
             if(m_animation->getPosition().y == colisi.walk_level)
             {
-                flag = 0;
                 if(flag1)
                 {
-                    m_animation->setTextureRect(sf::IntRect(0 * 660,source.y + 100,700,1100));
+                    m_animation->setTextureRect(sf::IntRect(0 * 660, 100,700,1100));
                 }
                 else
                 {
-                    source.y = 1;
-                    m_animation->setTextureRect(sf::IntRect(0 * 670,source.y * 1150 + 100,700,1100));
+                    m_animation->setTextureRect(sf::IntRect(0 * 670, 1150 + 100,700,1100));
                 }
             }
             break;
@@ -228,10 +166,9 @@ void Character::process_event(HIEvent event){
 
 void Character::update()
 {
-    int collisionflag3 = 0;
-    m_animation->move(colisi.x_move, 0);
-    int y_moins1 = m_animation->getPosition().y;
-    jump_manager(m_animation, colisi.walk_level, 0,collisionflag3);
+    m_animation->move((float)colisi.x_move, 0);
+    int y_moins1 = (int)m_animation->getPosition().y;
+    jump_manager(m_animation, (float)colisi.walk_level, 0);
     if (m_animation->getPosition().y >= colisi.walk_level && y_moins1 < colisi.walk_level)
     {
         if (flag1)
@@ -252,7 +189,7 @@ void Character::update()
 
 int Character::getCharacterLevel(void)
 {
-    return m_animation->getPosition().y;
+    return (int)m_animation->getPosition().y;
 }
 
 int Character::getNbPencil(void)

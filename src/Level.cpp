@@ -16,10 +16,10 @@ bool level_execute(level_str* level_info, sf::RenderWindow* window)
     int levelJump = 0;
 
     auto level = resource->get_json("levels/"+ level_info->name+".json");
-    View view = (sf::FloatRect(0,
-        SCREEN_Y_PXSIZE - ((int)(*level)["background"]["world"]["y"]) * BLOCK_PXSIZE,
-        ((int)(*level)["background"]["world"]["x"]) * BLOCK_PXSIZE,
-        ((int)(*level)["background"]["world"]["y"]) * BLOCK_PXSIZE));
+    View view = (sf::FloatRect((float)0,
+        (float)(SCREEN_Y_PXSIZE - ((int)(*level)["background"]["world"]["y"]) * BLOCK_PXSIZE),
+        (float)(((int)(*level)["background"]["world"]["x"]) * BLOCK_PXSIZE),
+        (float)(((int)(*level)["background"]["world"]["y"]) * BLOCK_PXSIZE)));
     Background background(resource, level_info->name, sf::IntRect(0,
         0,
         ((int)(*level)["background"]["world"]["x"]) * BLOCK_PXSIZE,

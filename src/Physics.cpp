@@ -21,7 +21,7 @@ uint64_t Timer::get_time_s(){
     return get_time_ms()/1000;
 }
 
-void jump_manager(std::shared_ptr<sf::Sprite> sprite, float GroundLevel,int vitesseInit,bool ColisionFlag)
+void jump_manager(std::shared_ptr<sf::Sprite> sprite, float GroundLevel,int vitesseInit)
 {
     static float startup = 0;
 	static int vitesse0;
@@ -29,7 +29,7 @@ void jump_manager(std::shared_ptr<sf::Sprite> sprite, float GroundLevel,int vite
     float time_now = 0;
 	float posy;
 
-	if (sprite->getPosition().y >= GroundLevel || ColisionFlag)
+	if (sprite->getPosition().y >= GroundLevel)
 	{
         startup = Timer::get_time_ms() / 1000.0;
 		vitesse0 = vitesseInit;

@@ -22,10 +22,10 @@ Menu::Menu(std::shared_ptr<ResourceManager> resource)
         int x = but["x"];
         int y = but["y"];
         x *= BLOCK_PXSIZE;
-        x += SCREEN_X_PXSIZE / 2-sprite->getGlobalBounds().width/2;
+        x += (int)((float)SCREEN_X_PXSIZE / 2-sprite->getGlobalBounds().width/2);
         y *= BLOCK_PXSIZE;
-        y += SCREEN_Y_PXSIZE / 2-sprite->getGlobalBounds().height/2;
-        button->sprite->setPosition(x, y);
+        y += (int)((float)SCREEN_Y_PXSIZE / 2-sprite->getGlobalBounds().height/2);
+        button->sprite->setPosition((float)x, (float)y);
         text->setPosition(x+sprite->getGlobalBounds().width/2-text->getGlobalBounds().width/2,
             y+ sprite->getGlobalBounds().height / 2 - text->getGlobalBounds().height);
 
@@ -71,7 +71,10 @@ void Menu::process_event_menu(HIEvent events, std::shared_ptr<const json> config
     case HIEvent::MOUSE_DOWN:
         for (auto button : buttons)
         {
-            if (button->sprite->getGlobalBounds().intersects(sf::FloatRect(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y, 1, 1)))
+            if (button->sprite->getGlobalBounds().intersects(sf::FloatRect(
+                (float)sf::Mouse::getPosition().x,
+                (float)sf::Mouse::getPosition().y, 
+                (float)1, (float)1)))
             {
                 if (button->function == "play")
                 {

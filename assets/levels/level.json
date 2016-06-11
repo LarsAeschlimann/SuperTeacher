@@ -17,19 +17,19 @@
         "size" : 1
     },
    "interactive" : [
-                    {"x": 50,"y": 16,"image":"backgrounds/Paper_stack","size": 0.5,"function":"charge","value":200},
-                    {"x": 20.5,"y": 16,"image":"characters/student","size":0.25, "function":"mob","value":1},
-                    {"x": 22,"y": 16,"image":"backgrounds/Paper_stack","size": 0.5,"function":"bonus","value":10},
+                    {"x": 50,"y": 16,"image":"backgrounds/Paper_stack","function":"charge","value":200,"x_scale":0.5,"y_scale":0.5,"delta_x":0.05,"delta_y":0.05},
+                    {"x": 20.5,"y": 16,"image":"characters/student", "function":"mob","value":1,"x_scale":0.25,"y_scale":0.25,"delta_x":6,"delta_y":-9},
+                    {"x": 22,"y": 16,"image":"backgrounds/Paper_stack","function":"bonus","value":10,"x_scale":0.5,"y_scale":0.5,"delta_x":0.05,"delta_y":0.05},
                     {"x": 12,"y": 16,"image":"backgrounds/Paper_stack","size":1,"function":"nothing"},
                     {"x": 12,"y": 14,"image":"backgrounds/Paper_stack","size":1,"function":"platform"},
                     {"x": 28,"y": 16,"image":"backgrounds/Paper_stack","size":1,"function":"platform"},
                     {"x": 22,"y": 3,"image":"backgrounds/Paper_stack","size":1,"function":"platform"},
                     {"x": 26,"y": 2,"image":"backgrounds/Paper_stack","size":1,"function":"platform"},
                     {"x": 30,"y": 1,"image":"backgrounds/Paper_stack","size":1,"function":"platform"},
-                    {"x": 23,"y": -1,"image":"backgrounds/Paper_stack","size": 0.5,"function":"charge","value":1},
-                    {"x": 45,"y": 16,"image":"characters/student","size":0.25, "function":"mob","value":1},
-                    {"x": 31,"y": -3,"image":"backgrounds/Paper_stack","size": 0.5,"function":"bonus","value":5},
-                    {"x": 55,"y": 14,"image":"tests/HUD/hud_heartFull","size": 3,"function":"live","value":1},
-                    {"x": 59,"y": 16,"image":"characters/student","size":0.25,"function":"end"}
+                    {"x": 23,"y": -1,"image":"backgrounds/Paper_stack","function":"charge","value":1,"x_scale":0.5,"y_scale":0.5,"delta_x":0.05,"delta_y":0.05},
+                    {"x": 45,"y": 16,"image":"characters/student", "function":"mob","value":1,"x_scale":0.25,"y_scale":0.25,"delta_x":6.5,"delta_y":10},
+                    {"x": 31,"y": -3,"image":"backgrounds/Paper_stack","function":"bonus","value":5,"x_scale":0.5,"y_scale":0.5,"delta_x":0.05,"delta_y":0.05},
+                    {"x": 55,"y": 14,"image":"tests/HUD/hud_heartFull","function":"live","value":1,"x_scale":0,"y_scale":3,"delta_x":3,"delta_y":0},
+                    {"x": 94,"y": 16,"image":"backgrounds/window","size":0.7,"function":"end"}
                    ]
 }
