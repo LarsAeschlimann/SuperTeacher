@@ -43,7 +43,8 @@ add_executable(superteacher
 		View.cpp View.h
 		Text.cpp Text.h
 		Interactives.cpp Interactives.h
-        Pencil.cpp Pencil.h)
+        Pencil.cpp Pencil.h
+		Level.cpp Level.h)
 
 
 add_dependencies(superteacher JSON)

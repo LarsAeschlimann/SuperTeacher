@@ -21,7 +21,15 @@
 #include "View.h"
 #include "Text.h"
 #include "Interactives.h"
+#include "Level.h"
 using namespace std;
+
+typedef struct
+{
+    shared_ptr<sf::Sprite> sprite;
+    shared_ptr<sf::Text> text;
+    string function;
+}Button;
 
 
 int main(int argc, char *argv[]) {
@@ -40,7 +48,7 @@ int main(int argc, char *argv[]) {
     auto config = resource->get_json("conf.json");
     auto style = sf::Style::Default;
     
-    Ground ground(resource, "level");
+    /*Ground ground(resource, "level");
     Object people = {};
     Object front_print = {};
     Interactives interact(resource, "level");
@@ -64,7 +72,7 @@ int main(int argc, char *argv[]) {
     std::shared_ptr<sf::Text> timetext = make_shared<sf::Text>("Clock: " + to_string(Timer::get_time_ms()), *font, 100);
   
     text.Add_Text(timetext, sf::Vector2f(-1500, -25) + view.GetView().getCenter());
-    
+    */
     if((bool)(*config)["video"]["fullscreen"]){
         style = sf::Style::Fullscreen;
     }
@@ -76,20 +84,106 @@ int main(int argc, char *argv[]) {
             "SuperTeacher",
             style
     );
+//auto resource = make_shared<ResourceManager>();
+ //       auto config = resource->get_json("conf.json");
+ //       auto style = sf::Style::Default;
 
-    window.setFramerateLimit(50);
-    HIManager user_input = {&window};
+                level_str level_info = {false,0,0,0,"level"};
+        auto menu = resource->get_json("levels/menu.json");
+        vector<Button> buttons;
 
+        for (auto but : (*menu)["button"])
+        {
+            Button button;
+            string source = but["image"];
+            auto sprite = make_shared<sf::Sprite>();
+            auto texture = resource->get_texture("graphics/" + source + ".png");
+            sprite->setTexture(*texture);
+            button.sprite = sprite;
+            string name = but["name"];
+            shared_ptr<sf::Text> text = make_shared<sf::Text>(name, *resource->get_font(MATHLETE),100);
+            text->setPosition((int)but["x"], (int)but["y"]);
+            int x = but["x"];
+            int y = but["y"];
+            button.sprite->setPosition(x,y);
 
-    user_input.HIEvent_sig.connect([&window](HIEvent event)->void{
+            string function = but["function"];
+            button.function = function;
+            button.text = text;
+            buttons.push_back(button);
+        }
+    
+    //HIManager user_input = {&window};
+                sf::View view;
+                view.setCenter(sf::Vector2f(SCREEN_X_PXSIZE / 2, SCREEN_Y_PXSIZE / 2));
+                view.setSize(sf::Vector2f(SCREEN_X_PXSIZE, SCREEN_Y_PXSIZE));
+    HIManager user_input = { &window };
+    user_input.HIEvent_sig.connect([&window,&level_info,&buttons,&view](HIEvent event)->void{
         switch(event) {
             case HIEvent::CLOSE:
                 window.close();
 				break;
+            /*case HIEvent::JUMP:
+                window.setFramerateLimit(50);
+                level_info = { false,0,0,0,"level" };
+                level_execute(&level_info, &window);
+                break;*/
+            case HIEvent::MOUSE_DOWN:
+                for (auto button : buttons)
+                {
+                    if (button.sprite->getGlobalBounds().intersects(sf::FloatRect(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y,1,1)))
+                    {
+                        if (button.function == "play")
+                        {
+                            level_info = { false,0,0,0,"level" };
+                            level_execute(&level_info, &window);
+                            window.setView(view);
+                        }
+                        if (button.function == "quit")
+                        {
+                            window.close();
+                        }
+                    }
+                }
+                break;
+            /*case HIEvent::GO_UP:
+                view.move(0, -1);
+                break;
+            case HIEvent::GO_DOWN:
+                view.move(0, 1);
+                break;
+            case HIEvent::GO_LEFT:
+                view.move(-1, 0);
+                break;
+            case HIEvent::GO_RIGHT:
+                view.move(1, 0);
+                break;*/
             default:
                 break;
         }
     });
+
+    while (window.isOpen())
+    {
+        /**/
+        //window.setPosition(sf::Vector2i(0, 0));
+            window.clear();
+        for (auto button:buttons)
+        {
+            if (button.function == "score")
+            {
+                button.text->setString("Score: " + to_string((int)level_info.score));
+            }
+            window.draw(*button.sprite);
+            window.draw(*button.text);
+        }
+    window.setView(view);
+        window.display();
+        user_input.process();
+
+    }
+    //window.close();
+    /*
     
 
 	
@@ -125,13 +219,14 @@ int main(int argc, char *argv[]) {
     if((bool)(*config)["audio"]){
         song->play();
     }
+    colision col = { true,true,ground_level*BLOCK_PXSIZE,0 };
     
     while(window.isOpen()){
 
 
         user_input.process();
-
-        character.write_collision(interact.update(character,score,ground_level*BLOCK_PXSIZE));
+        auto level_status = interact.update(character, score, ground_level*BLOCK_PXSIZE,&col);
+        character.write_collision(col);
         character.update();
 
         window.clear(sf::Color::Blue);
@@ -142,7 +237,7 @@ int main(int argc, char *argv[]) {
         timetext->setString("Time: " + to_string(tmp_time) + " sec");
         pencil->setString("Pencils: " + to_string(character.getNbPencil()));
         live->setString("Lives: " + to_string(character.getLive()));
-        if (character.getLive() <= 0)
+        if (level_status.end)//(character.getLive() <= 0)
         {
             window.close();
         }
@@ -178,7 +273,7 @@ int main(int argc, char *argv[]) {
         window.display();
         window.clear();
     }
-
+    */
     LOG(info) << "Good bye, end of main process";
     return 0;
 }

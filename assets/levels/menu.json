@@ -1,0 +1,9 @@
+{
+   "image" : "menu/font_1",
+   "button" : [
+               {"x":0,"y":0,"image":"menu/font_1","name":" ","function":" "},
+               {"x":800,"y":200,"image":"menu/button_1","name":"Start","function":"play"},
+               {"x":800,"y":700,"image":"menu/button_1","name":"Sortir","function":"quit"},
+               {"x":1400,"y":100,"image":"interactives/invisible","name":" ","function":"score"}
+                   ]
+}
