@@ -11,11 +11,10 @@ const int SCREEN_Y_PXSIZE = SCREEN_Y_BLOCKS * BLOCK_PXSIZE;
 const int GRAVITY = 10;
 const int SPEED = 5;
 const int JUMP = 9;
-const int THROW_LEVEL = 80;
 
 const int FLASH_SIZE_FACTOR = 20;
 const int FLASH_SPEED_FACTOR = 5;
-const int SECUR_SPACE = 80;
+const int SECUR_SPACE = 100;
 
 static inline int bl(int block){
    return block * BLOCK_PXSIZE;
