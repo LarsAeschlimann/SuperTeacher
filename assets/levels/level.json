@@ -21,12 +21,18 @@
     },
    "interactive" : [
                     {"x": 50,"y": 16,"image":"backgrounds/Paper_stack","function":"charge","value":2,"x_scale":0.4,"y_scale":0.4,"delta_x":0.05,"delta_y":0.05},
-                    {"x": 20.5,"y": 16,"image":"characters/student", "function":"mob","value":1,"x_scale":0.19,"y_scale":0.19,"delta_x":6,"delta_y":-9},
-                    {"x": 22,"y": 16,"image":"backgrounds/Paper_stack","function":"bonus","value":10,"x_scale":0.4,"y_scale":0.4,"delta_x":0.05,"delta_y":0.05},
-                    {"x": 12,"y": 16,"image":"backgrounds/Paper_stack","size":1,"function":"platform"},
-                    {"x": 20,"y": 4,"image":"backgrounds/Bookshelf","size":0.15,"function":"platform"},
+                    {"x": 22.5,"y": 16,"image":"characters/student", "function":"mob","value":1,"x_scale":0.19,"y_scale":0.19,"delta_x":6,"delta_y":-8},
+                    {"x": 23,"y": 16,"image":"backgrounds/Paper_stack","function":"bonus","value":10,"x_scale":0.4,"y_scale":0.4,"delta_x":0.05,"delta_y":0.05},
+                    {"x": 14,"y": 16,"image":"backgrounds/Paper_stack","size":1,"function":"platform"},
+                    {"x": 21,"y": 4,"image":"backgrounds/Bookshelf","size":0.15,"function":"platform"},
                     {"x": 50,"y": 4,"image":"backgrounds/Bookshelf","size":0.15,"function":"platform"},
-                    {"x": 80,"y": 2,"image":"backgrounds/Bookshelf","size":0.15,"function":"platform"},
+                    {"x": 74,"y": 16,"image":"characters/student", "function":"mob","value":1,"x_scale":0.19,"y_scale":0.19,"delta_x":6.4,"delta_y":8},
+                    {"x": 78,"y": 1,"image":"backgrounds/Bookshelf","size":0.15,"function":"platform"},
+                    {"x": 80,"y": -2,"image":"backgrounds/Paper_stack","function":"charge","value":1,"x_scale":0.4,"y_scale":0.4,"delta_x":0.05,"delta_y":0.05},
+                    {"x": 130,"y": 0,"image":"backgrounds/Bookshelf","size":0.15,"function":"platform"},
+                    {"x": 150,"y": -4,"image":"backgrounds/Bookshelf","size":0.15,"function":"platform"},
+                    {"x": 150,"y": 16,"image":"characters/student", "function":"mob","value":1,"x_scale":0.19,"y_scale":0.19,"delta_x":5.9,"delta_y":12},
+                    {"x": 170,"y": -8,"image":"backgrounds/Bookshelf","size":0.15,"function":"platform"},
                     {"x": 180,"y": 4,"image":"backgrounds/Bookshelf","size":0.15,"function":"platform"},
                     {"x": 65,"y": 16,"image":"backgrounds/Locker","size":0.35,"function":"platform"},
                     {"x": 5,"y": 3,"image":"backgrounds/Bookshelf","size":0.15,"function":"platform"},
@@ -41,6 +47,7 @@
                     {"x": 110,"y": 2,"image":"characters/student", "function":"mob","value":1,"x_scale":0.19,"y_scale":0.19,"delta_x":3,"delta_y":2},
                     {"x": 31,"y": -3,"image":"backgrounds/Paper_stack","function":"bonus","value":5,"x_scale":0.4,"y_scale":0.4,"delta_x":0.05,"delta_y":0.05},
                     {"x": 51,"y": -1,"image":"backgrounds/Heart","function":"live","value":1,"x_scale":0,"y_scale":0.3,"delta_x":0.3,"delta_y":0},
+                    {"x": 182,"y": 1,"image":"backgrounds/Paper_stack","function":"bonus","value":25,"x_scale":0.4,"y_scale":0.4,"delta_x":0.05,"delta_y":0.05},
                     {"x": 194,"y": 16,"image":"backgrounds/window","size":0.7,"function":"end"}
                    ]
 }
