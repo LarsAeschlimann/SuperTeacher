@@ -28,7 +28,9 @@ enum class HIEvent {
 	CLOSE,
 	DEFAULT,
     MOUSE_DOWN,
-    KEY_UP
+    KEY_UP,
+    DOWN_DOWN,
+    DOWN_UP
 };
 
 /**
