@@ -48,6 +48,6 @@
                     {"x": 31,"y": -3,"image":"backgrounds/Paper_stack","function":"bonus","value":5,"x_scale":0.4,"y_scale":0.4,"delta_x":0.05,"delta_y":0.05},
                     {"x": 51,"y": -1,"image":"backgrounds/Heart","function":"live","value":1,"x_scale":0,"y_scale":0.3,"delta_x":0.3,"delta_y":0},
                     {"x": 182,"y": 1,"image":"backgrounds/Paper_stack","function":"bonus","value":25,"x_scale":0.4,"y_scale":0.4,"delta_x":0.05,"delta_y":0.05},
-                    {"x": 194,"y": 16,"image":"backgrounds/window","size":0.7,"function":"end"}
+                    {"x": 194,"y": 16,"image":"backgrounds/Door","size":0.7,"function":"end"}
                    ]
 }
