@@ -160,7 +160,7 @@ level_str Interactives::update(Character& mainPerson, std::shared_ptr<sf::Text> 
             {
 
                 if (((rect.top+rect.height) <= pack->sprite->getGlobalBounds().top + SECUR_SPACE &&
-                    rect.left < pack->sprite->getGlobalBounds().left+pack->sprite->getGlobalBounds().width - 1 &&
+                    rect.left < pack->sprite->getGlobalBounds().left+pack->sprite->getGlobalBounds().width - 2 &&
                     rect.left + rect.width > pack->sprite->getGlobalBounds().left + 1) )
                 {
                     col->walk_level = pack->sprite->getGlobalBounds().top+1;
@@ -191,16 +191,15 @@ level_str Interactives::update(Character& mainPerson, std::shared_ptr<sf::Text> 
                 else if (rect.left + rect.width < pack->sprite->getGlobalBounds().left + pack->sprite->getGlobalBounds().width / 2 &&
                     (rect.top + rect.height) > pack->sprite->getGlobalBounds().top + SECUR_SPACE)
                 {
-                    col->x_move =  pack->sprite->getGlobalBounds().left-(rect.left + rect.width);
-                    col->left_enable = false;
+                    col->x_move =  pack->sprite->getGlobalBounds().left-(rect.left + rect.width)+1;
+                    col->right_enable = false;
                 }
                 else if (rect.left > pack->sprite->getGlobalBounds().left + pack->sprite->getGlobalBounds().width / 2  &&
                     (rect.top + rect.height) > pack->sprite->getGlobalBounds().top + SECUR_SPACE)
                 {
-                    col->x_move = pack->sprite->getGlobalBounds().left - rect.left +  pack->sprite->getGlobalBounds().width;
-                    col->right_enable = false;
+                    col->x_move = pack->sprite->getGlobalBounds().left - rect.left +  pack->sprite->getGlobalBounds().width-1;
+                    col->left_enable = false;
                 }
-                
                 no_col = false;
             }
         }
@@ -259,12 +258,12 @@ level_str Interactives::update(Character& mainPerson, std::shared_ptr<sf::Text> 
         }
         if (pack->function == mouse)
         {
-            if (rect.intersects(sf::Rect<float>(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y, 1, 1)))
+            int x = sf::Mouse::getPosition().x+rect.left+rect.width/2-SCREEN_X_PXSIZE/2;
+            int y = sf::Mouse::getPosition().y+rect.top+rect.height/2-SCREEN_Y_PXSIZE/2;
+            if (rect.intersects(sf::Rect<float>(x, y, 1, 1)))
             {
                 tuch = true;
             }
-            int x = sf::Mouse::getPosition().x;
-            int y = sf::Mouse::getPosition().y;
             pack->sprite->setPosition(x, y);
             if (tuch)
             {

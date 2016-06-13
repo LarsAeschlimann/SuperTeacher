@@ -48,10 +48,14 @@ bool level_execute(level_str* level_info, sf::RenderWindow* window)
             level_info->end = true;
             break;
         case HIEvent::DOWN_DOWN:
-            view.SetSize(sf::Vector2f(1.2*SCREEN_X_PXSIZE,1.2*SCREEN_Y_PXSIZE));
-            break;
-        case HIEvent::DOWN_UP:
-            view.SetSize(sf::Vector2f(1*SCREEN_X_PXSIZE, 1*SCREEN_Y_PXSIZE));
+            if (view.GetView().getSize().x == SCREEN_X_PXSIZE)
+            {
+                view.SetSize(sf::Vector2f(1.2*SCREEN_X_PXSIZE, 1.2*SCREEN_Y_PXSIZE));
+            }
+            else
+            {
+                view.SetSize(sf::Vector2f(1*SCREEN_X_PXSIZE, 1*SCREEN_Y_PXSIZE));
+            }
             break;
         default:
             break;
