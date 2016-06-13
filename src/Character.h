@@ -35,13 +35,11 @@ public:
 private:
     std::shared_ptr<ResourceManager> m_resource;
     std::shared_ptr<sf::Sprite> m_animation;
-    std::shared_ptr<sf::Sprite> m_student_animation;
-    std::shared_ptr<sf::Sprite> m_superteacher;
-    std::shared_ptr<sf::Sprite> m_transparent;
     std::vector<Pencil> m_pencils;
     colision colisi;
     int m_nb_pencils;
     int m_live;
     int jumpLevel;
-    int MINLEVEL;    
+    int MINLEVEL;
+    bool flag1;
 };
