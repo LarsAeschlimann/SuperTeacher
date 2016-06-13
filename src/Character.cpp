@@ -25,7 +25,7 @@ Character::Character(std::shared_ptr<ResourceManager> resource, std::string leve
     m_animation = std::make_shared<sf::Sprite>();
     m_animation->setTexture(*animation_texture);
     animation_texture->setSmooth(true);
-    m_animation->setScale((float)0.4, (float)0.4);
+    m_animation->setScale((float)0.35, (float)0.35);
     m_animation->setOrigin((float)0, (float)colisi.walk_level);
     m_animation->move((float)10, (float)colisi.walk_level);
     m_animation->setTextureRect(sf::IntRect(0 * 660,  100, 700, 1100));

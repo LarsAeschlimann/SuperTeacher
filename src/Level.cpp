@@ -42,11 +42,16 @@ bool level_execute(level_str* level_info, sf::RenderWindow* window)
     window->setFramerateLimit(50);
     HIManager user_input = { window };
 
-
-    user_input.HIEvent_sig.connect([level_info](HIEvent event)->void {
+    user_input.HIEvent_sig.connect([level_info,&view](HIEvent event)->void {
         switch (event) {
         case HIEvent::CLOSE:
             level_info->end = true;
+            break;
+        case HIEvent::DOWN_DOWN:
+            view.SetSize(sf::Vector2f(1.2*SCREEN_X_PXSIZE,1.2*SCREEN_Y_PXSIZE));
+            break;
+        case HIEvent::DOWN_UP:
+            view.SetSize(sf::Vector2f(1*SCREEN_X_PXSIZE, 1*SCREEN_Y_PXSIZE));
             break;
         default:
             break;
@@ -109,7 +114,7 @@ bool level_execute(level_str* level_info, sf::RenderWindow* window)
         pencil->setString("Pencils: " + to_string(character.getNbPencil()));
         live->setString("Lives: " + to_string(character.getLive()));
 
-        text.update(view.GetView().getCenter());
+        text.update(view.GetView());
 
         // Dessin
 

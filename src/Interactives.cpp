@@ -194,7 +194,7 @@ level_str Interactives::update(Character& mainPerson, std::shared_ptr<sf::Text> 
                     col->x_move =  pack->sprite->getGlobalBounds().left-(rect.left + rect.width);
                     col->left_enable = false;
                 }
-                else if (rect.left > pack->sprite->getGlobalBounds().left - pack->sprite->getGlobalBounds().width / 2 + pack->sprite->getGlobalBounds().width &&
+                else if (rect.left > pack->sprite->getGlobalBounds().left + pack->sprite->getGlobalBounds().width / 2  &&
                     (rect.top + rect.height) > pack->sprite->getGlobalBounds().top + SECUR_SPACE)
                 {
                     col->x_move = pack->sprite->getGlobalBounds().left - rect.left +  pack->sprite->getGlobalBounds().width;

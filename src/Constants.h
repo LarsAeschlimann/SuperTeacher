@@ -15,7 +15,7 @@ const int THROW_LEVEL = 80;
 
 const int FLASH_SIZE_FACTOR = 20;
 const int FLASH_SPEED_FACTOR = 5;
-const int SECUR_SPACE = 100;
+const int SECUR_SPACE = 80;
 
 static inline int bl(int block){
    return block * BLOCK_PXSIZE;
