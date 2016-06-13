@@ -41,6 +41,13 @@ void HIManager::process(void) {
                         HIEvent_sig(HIEvent::FAST_UP);
                         FlagUse = 0;
                     }
+                    else
+                    {
+                        HIEvent_sig(HIEvent::KEY_UP);
+                    }
+                    break;
+                case sf::Event::MouseButtonPressed:
+                    HIEvent_sig(HIEvent::MOUSE_DOWN);
                     break;
                 default:
                     break;
@@ -57,7 +64,7 @@ void HIManager::process(void) {
             HIEvent_sig(HIEvent::GO_RIGHT);
 			FlagUse = 0;
 		};
-        /*
+        
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{
 			HIEvent_sig(HIEvent::GO_UP);
@@ -68,7 +75,7 @@ void HIManager::process(void) {
 		{
 			HIEvent_sig(HIEvent::GO_DOWN);
 			FlagUse = 0;
-		};*/
+		};
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
         {
             HIEvent_sig(HIEvent::JUMP);

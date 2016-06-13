@@ -1,0 +1,10 @@
+{
+   "image" : "menu/font_1",
+   "button" : [
+               {"x":0,"y":0,"image_off":"menu/font_1","image_on":"menu/font_1","name":" ","function":" "},
+               {"x":0,"y":-5,"image_off":"menu/button_1","image_on":"menu/button_2","name":"Jouer","function":"play"},
+               {"x":0,"y":0,"image_off":"menu/button_1","image_on":"menu/button_2","name":"Recommencer","function":"restart"},
+               {"x":0,"y":5,"image_off":"menu/button_1","image_on":"menu/button_2","name":"Sortir","function":"quit"},
+               {"x":5,"y":-8,"image_off":"interactives/invisible","image_on":"interactives/invisible","name":" ","function":"score"}
+                   ]
+}

@@ -1,0 +1,26 @@
+{
+    "init":{
+        "pencil" : 1000,
+        "lives"  : 3
+           },
+    "background" : {
+        "world": {"x":200,"y":60},
+        "fill": "background",
+        "objects": [
+                    {"x": 5,  "y": 3, "image": "backgrounds/window", "size": 0.5},
+                    {"x": 30, "y": 3, "image": "backgrounds/window", "size": 0.5}
+                    ]
+    },
+    "ground" : {
+        "level" : 16,
+        "name" : "carlage",
+        "size" : 1
+    },
+   "interactive" : [
+                    {"x": 16,"y": 9,"image":"backgrounds/Paper_stack","size":1,"function":"platform"},
+                    {"x": 22,"y": 3,"image":"backgrounds/Paper_stack","size":1,"function":"platform"},
+                    {"x": 26,"y": 2,"image":"backgrounds/Paper_stack","size":1,"function":"platform"},
+                    {"x": 30,"y": 1,"image":"backgrounds/Paper_stack","size":1,"function":"platform"},
+                    {"x": 194,"y": 16,"image":"backgrounds/window","size":0.7,"function":"end"}
+                   ]
+}
