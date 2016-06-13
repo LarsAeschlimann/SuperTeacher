@@ -6,7 +6,6 @@
 
 void HIManager::process(void) {
 
-		bool FlagUse = 1;
 
         while(window->pollEvent(event)){
 
@@ -23,8 +22,10 @@ void HIManager::process(void) {
                             break;*/
                         case sf::Keyboard::Up:
 							HIEvent_sig(HIEvent::FAST_DOWN);
-							FlagUse = 0;
 							break;
+                        case sf::Keyboard::Down:
+                            HIEvent_sig(HIEvent::DOWN_DOWN);
+                            break;
 						case sf::Keyboard::Escape:
                             HIEvent_sig(HIEvent::CLOSE);
 							break;
@@ -36,11 +37,33 @@ void HIManager::process(void) {
                     }
                     break;
                 case sf::Event::KeyReleased:
-                    if (event.key.code == sf::Keyboard::Up)
-                    {
+                    switch (event.key.code) {
+                    case sf::Keyboard::Up:
                         HIEvent_sig(HIEvent::FAST_UP);
-                        FlagUse = 0;
+                        break;
+                    case sf::Keyboard::Down:
+                        HIEvent_sig(HIEvent::DOWN_UP);
+                        break;
+                    case sf::Keyboard::Right:
+                        HIEvent_sig(HIEvent::KEY_UP);
+                        break;
+                    case sf::Keyboard::Left:
+                        HIEvent_sig(HIEvent::KEY_UP);
+                        break;
+                    default:
+                        break;
+
                     }
+                    else
+                    {
+                        HIEvent_sig(HIEvent::KEY_UP);
+                    }
+                    break;
+                case sf::Event::MouseButtonPressed:
+                    HIEvent_sig(HIEvent::MOUSE_DOWN);
+                    break;
+                case sf::Event::MouseButtonPressed:
+                    HIEvent_sig(HIEvent::MOUSE_DOWN);
                     break;
                 default:
                     break;
@@ -50,34 +73,28 @@ void HIManager::process(void) {
 		{
             
 			HIEvent_sig(HIEvent::GO_LEFT);
-			FlagUse = 0;
 		};
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{
             HIEvent_sig(HIEvent::GO_RIGHT);
-			FlagUse = 0;
 		};
-        /*
+        
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{
 			HIEvent_sig(HIEvent::GO_UP);
-			FlagUse = 0;
 		};
 	
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		{
 			HIEvent_sig(HIEvent::GO_DOWN);
+<<<<<<< HEAD
 			FlagUse = 0;
-		};*/
+=======
+>>>>>>> BFH-E1D-2015-2016/master
+		};
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
         {
             HIEvent_sig(HIEvent::JUMP);
-			FlagUse = 0;
         };
-        
-		if (FlagUse)
-		{
-			HIEvent_sig(HIEvent::DEFAULT);
-		};
 }
 

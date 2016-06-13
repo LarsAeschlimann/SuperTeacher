@@ -1,6 +1,10 @@
 {
   "video" : {
-    "fullscreen" : false
+    "fullscreen" : true
   },
-    "audio": false
+    "audio": true,
+  "level_names":[
+    "level"
+     ],
+  "level_number":1
 }

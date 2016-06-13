@@ -26,7 +26,15 @@ enum class HIEvent {
 	JUMP,
     THROW,
 	CLOSE,
-	DEFAULT
+	DEFAULT,
+    MOUSE_DOWN,
+<<<<<<< HEAD
+    KEY_UP
+=======
+    KEY_UP,
+    DOWN_DOWN,
+    DOWN_UP
+>>>>>>> BFH-E1D-2015-2016/master
 };
 
 /**

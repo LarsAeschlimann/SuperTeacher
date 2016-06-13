@@ -1,6 +1,7 @@
 //#include <iostream>
 
 #include "Text.h"
+#include "Constants.h"
 
 Text::Text(std::string text,sf::Vector2f position_on_screen,std::shared_ptr<const sf::Font> font)
 {
@@ -17,11 +18,13 @@ void Text::Add_Text(std::shared_ptr<sf::Text> text, sf::Vector2f position_on_scr
 }
 
 
-void Text::update(sf::Vector2f screen_position)
+void Text::update(sf::View screen)
 {
+    auto size = sf::Vector2f(screen.getSize().x/SCREEN_X_PXSIZE,screen.getSize().y/SCREEN_Y_PXSIZE);
     for (auto n : m_text)
     {
-        n->setPosition(screen_position);
+        n->setScale(size);
+        n->setPosition(screen.getCenter());
     }
 }
 
