@@ -4,11 +4,14 @@
         "lives"  : 3
            },
     "background" : {
-        "world": {"x":100,"y":60},
+        "world": {"x":300,"y":60},
         "fill": "background",
         "objects": [
-                    {"x": 5,  "y": 3, "image": "backgrounds/window", "size": 0.5},
-                    {"x": 30, "y": 3, "image": "backgrounds/window", "size": 0.5}
+                    {"x": 5,  "y": 3, "image": "backgrounds/window", "size": 0.6},
+                    {"x": 30, "y": 3, "image": "backgrounds/window", "size": 0.6},
+                    {"x": 55, "y": 3, "image": "backgrounds/window", "size": 0.6},
+                    {"x": 80, "y": 3, "image": "backgrounds/window", "size": 0.6},
+                    {"x": 105, "y": 3, "image": "backgrounds/window", "size": 0.6}
                     ]
     },
     "ground" : {
@@ -17,18 +20,23 @@
         "size" : 1
     },
    "interactive" : [
-                    {"x": 50,"y": 16,"image":"backgrounds/Paper_stack","size": 0.5,"function":"charge","value":2},
-                    {"x": 20.5,"y": 16,"image":"characters/student","size":0.25, "function":"mob","value":1},
-                    {"x": 22,"y": 16,"image":"backgrounds/Paper_stack","size": 0.5,"function":"bonus","value":10},
-                    {"x": 12,"y": 16,"image":"backgrounds/Paper_stack","size":1,"function":"nothing"},
-                    {"x": 12,"y": 14,"image":"backgrounds/Paper_stack","size":1,"function":"platform"},
-                    {"x": 28,"y": 16,"image":"backgrounds/Paper_stack","size":1,"function":"platform"},
-                    {"x": 22,"y": 3,"image":"backgrounds/Paper_stack","size":1,"function":"platform"},
-                    {"x": 26,"y": 2,"image":"backgrounds/Paper_stack","size":1,"function":"platform"},
-                    {"x": 30,"y": 1,"image":"backgrounds/Paper_stack","size":1,"function":"platform"},
-                    {"x": 23,"y": -1,"image":"backgrounds/Paper_stack","size": 0.5,"function":"charge","value":1},
-                    {"x": 45,"y": 16,"image":"characters/student","size":0.25, "function":"mob","value":1},
+                    {"x": 50,"y": 16,"image":"backgrounds/Paper_stack","size": 0.3,"function":"charge","value":2},
+                    {"x": 20.5,"y": 16,"image":"characters/student","size":0.2, "function":"mob","value":1},
+                    {"x": 22,"y": 16,"image":"backgrounds/Paper_stack","size": 0.3,"function":"bonus","value":10},
+                    {"x": 12,"y": 16,"image":"backgrounds/Paper_stack","size":1,"function":"platform"},
+                    {"x": 20,"y": 4,"image":"backgrounds/Bookshelf","size":0.15,"function":"platform"},
+                    {"x": 50,"y": 4,"image":"backgrounds/Bookshelf","size":0.15,"function":"platform"},
+                    {"x": 80,"y": 2,"image":"backgrounds/Bookshelf","size":0.15,"function":"platform"},
+                    {"x": 200,"y": 4,"image":"backgrounds/Bookshelf","size":0.15,"function":"platform"},
+                    {"x": 65,"y": 16,"image":"backgrounds/Locker","size":0.3,"function":"platform"},
+                    {"x": 5,"y": 2,"image":"backgrounds/Bookshelf","size":0.15,"function":"platform"},
+                    {"x": 80,"y": 16,"image":"backgrounds/Locker","size":0.3,"function":"platform"},
+                    {"x": 100,"y": 16,"image":"backgrounds/Locker","size":0.3,"function":"platform"},
+                    {"x": 120,"y": 16,"image":"backgrounds/Locker","size":0.3,"function":"platform"},
+                    {"x": 140,"y": 16,"image":"backgrounds/Locker","size":0.3,"function":"platform"},
+                    {"x": 23,"y": -1,"image":"backgrounds/Paper_stack","size": 0.3,"function":"charge","value":1},
+                    {"x": 45,"y": 16,"image":"characters/student","size":0.2, "function":"mob","value":1},
                     {"x": 31,"y": -3,"image":"backgrounds/Paper_stack","size": 0.5,"function":"bonus","value":5},
-                    {"x": 55,"y": 14,"image":"tests/HUD/hud_heartFull","size": 3,"function":"live","value":1}
+                    {"x": 55,"y": 14,"image":"backgrounds/Heart","size": 0.5,"function":"live","value":1}
                    ]
 }

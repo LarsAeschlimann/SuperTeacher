@@ -29,7 +29,7 @@ Character::Character(std::shared_ptr<ResourceManager> resource, std::string leve
     m_animation = std::make_shared<sf::Sprite>();
     m_animation->setTexture(*animation_texture);
     animation_texture->setSmooth(true);
-    m_animation->setScale(0.4, 0.4);
+    m_animation->setScale(0.35,  0.35);
     m_animation->setOrigin(0, colisi.walk_level);// m_animation->getGlobalBounds().height);// +BLOCK_PXSIZE); // TROUVER D'OU VIENT LE BLOCK DE DECALAGE, ET ENLEVER CELUI-CI
     m_animation->move(10,colisi.walk_level);
     m_animation->setTextureRect(sf::IntRect(0 * 660,  100, 700, 1100));
