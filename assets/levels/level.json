@@ -22,13 +22,13 @@
    "interactive" : [
                     {"x": 50,"y": 16,"image":"backgrounds/Paper_stack","function":"charge","value":2,"x_scale":0.4,"y_scale":0.4,"delta_x":0.05,"delta_y":0.05},
                     {"x": 22.5,"y": 16,"image":"characters/student", "function":"mob","value":1,"x_scale":0.19,"y_scale":0.19,"delta_x":6,"delta_y":-8},
-                    {"x": 23,"y": 16,"image":"backgrounds/Paper_stack","function":"bonus","value":10,"x_scale":0.4,"y_scale":0.4,"delta_x":0.05,"delta_y":0.05},
+                    {"x": 23,"y": 16,"image":"backgrounds/Paper_stack","function":"bonus","value":10,"x_scale":0.47,"y_scale":0.47,"delta_x":0.05,"delta_y":0.05},
                     {"x": 14,"y": 16,"image":"backgrounds/Paper_stack","size":1,"function":"platform"},
                     {"x": 21,"y": 4,"image":"backgrounds/Bookshelf","size":0.15,"function":"platform"},
                     {"x": 50,"y": 4,"image":"backgrounds/Bookshelf","size":0.15,"function":"platform"},
                     {"x": 74,"y": 16,"image":"characters/student", "function":"mob","value":1,"x_scale":0.19,"y_scale":0.19,"delta_x":6.4,"delta_y":8},
                     {"x": 78,"y": 1,"image":"backgrounds/Bookshelf","size":0.15,"function":"platform"},
-                    {"x": 80,"y": -2,"image":"backgrounds/Paper_stack","function":"charge","value":1,"x_scale":0.4,"y_scale":0.4,"delta_x":0.05,"delta_y":0.05},
+                    {"x": 80,"y": -2,"image":"backgrounds/Paper_stack","function":"charge","value":1,"x_scale":0.3,"y_scale":0.3,"delta_x":0.05,"delta_y":0.05},
                     {"x": 130,"y": 0,"image":"backgrounds/Bookshelf","size":0.15,"function":"platform"},
                     {"x": 150,"y": -4,"image":"backgrounds/Bookshelf","size":0.15,"function":"platform"},
                     {"x": 150,"y": 16,"image":"characters/student", "function":"mob","value":1,"x_scale":0.19,"y_scale":0.19,"delta_x":5.9,"delta_y":12},
@@ -40,14 +40,15 @@
                     {"x": 100,"y": 16,"image":"backgrounds/Locker","size":0.35,"function":"platform"},
                     {"x": 120,"y": 16,"image":"backgrounds/Locker","size":0.35,"function":"platform"},
                     {"x": 140,"y": 16,"image":"backgrounds/Locker","size":0.35,"function":"platform"},
-                    {"x": 23,"y": -1,"image":"backgrounds/Paper_stack","function":"charge","value":1,"x_scale":0.4,"y_scale":0.4,"delta_x":0.05,"delta_y":0.05},
+                    {"x": 23,"y": -1,"image":"backgrounds/Paper_stack","function":"charge","value":1,"x_scale":0.3,"y_scale":0.3,"delta_x":0.05,"delta_y":0.05},
                     {"x": 45,"y": 16,"image":"characters/student", "function":"mob","value":1,"x_scale":0.19,"y_scale":0.19,"delta_x":6.5,"delta_y":10},
                     {"x": 110,"y": 16,"image":"characters/student", "function":"mob","value":1,"x_scale":0.19,"y_scale":0.19,"delta_x":6.5,"delta_y":10},
                     {"x": 107,"y": 4,"image":"backgrounds/Bookshelf","size":0.15,"function":"platform"},
                     {"x": 110,"y": 2,"image":"characters/student", "function":"mob","value":1,"x_scale":0.19,"y_scale":0.19,"delta_x":3,"delta_y":2},
-                    {"x": 31,"y": -3,"image":"backgrounds/Paper_stack","function":"bonus","value":5,"x_scale":0.4,"y_scale":0.4,"delta_x":0.05,"delta_y":0.05},
-                    {"x": 51,"y": -1,"image":"backgrounds/Heart","function":"live","value":1,"x_scale":0,"y_scale":0.3,"delta_x":0.3,"delta_y":0},
-                    {"x": 182,"y": 1,"image":"backgrounds/Paper_stack","function":"bonus","value":25,"x_scale":0.4,"y_scale":0.4,"delta_x":0.05,"delta_y":0.05},
-                    {"x": 194,"y": 16,"image":"backgrounds/Door","size":0.7,"function":"end"}
+                    {"x": 7,"y": -1,"image":"backgrounds/Paper_stack","function":"bonus","value":5,"x_scale":0.4,"y_scale":0.4,"delta_x":0.05,"delta_y":0.05},
+                    {"x": 51,"y": -1,"image":"backgrounds/Heart","function":"live","value":1,"x_scale":0,"y_scale":0.2,"delta_x":0.2,"delta_y":0},
+                    {"x": 182,"y": -4,"image":"backgrounds/Paper_stack","function":"bonus","value":25,"x_scale":0.55,"y_scale":0.55,"delta_x":0.05,"delta_y":0.05},
+                    {"x": 135,"y": 16,"image":"backgrounds/Heart","function":"live","value":2,"x_scale":0,"y_scale":0.4,"delta_x":0.4,"delta_y":0},
+                    {"x": 192.5,"y": 17.1,"image":"backgrounds/door","size":0.35,"function":"end"}
                    ]
 }

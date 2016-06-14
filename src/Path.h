@@ -35,6 +35,6 @@ std::string get_file(std::string file);
 const std::string MATHLETE = "fonts/ThirdParty/Mathlete/Mathlete-Skinny.otf";
 const std::string SONG_MENU = "audio/ThirdParty/ForgottenClocktower.wav";
 //const std::string SONG_1 = "audio/ThirdParty/generic-8-bit-jrpg-soundtrack/08 - Overworld.ogg";
-const std::string SONG_1 = "audio/ThirdParty/Super Teacher.wav";
+const std::string SONG_1 = "audio/ThirdParty/SuperTeacher.WAV";
 //const std::string SONG_1 = "audio/ThirdParty/hold-the-line-orchestral-remix/hold the line_0.flac";
 
