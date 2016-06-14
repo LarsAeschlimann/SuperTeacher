@@ -17,9 +17,6 @@ void HIManager::process(void) {
                     break;
                 case sf::Event::KeyPressed:
                     switch(event.key.code){
-                        /*case sf::Keyboard::Right:
-                            HIEvent_sig(HIEvent::GO_RIGHT);
-                            break;*/
                         case sf::Keyboard::Up:
 							HIEvent_sig(HIEvent::FAST_DOWN);
 							break;
