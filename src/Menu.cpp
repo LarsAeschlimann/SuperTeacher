@@ -55,7 +55,8 @@ void Menu::update(level_str level_info, sf::RenderWindow* window)
                 button->text->setString("Game Over");
             }
         }
-        if (button->sprite->getGlobalBounds().contains((sf::Vector2f)sf::Mouse::getPosition()))
+        if (button->sprite->getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(*window).x*SCREEN_X_PXSIZE/window->getSize().x,
+            sf::Mouse::getPosition(*window).y*SCREEN_Y_PXSIZE / window->getSize().y)))
         {
             button->sprite->setTexture(*button->on);
         }
@@ -75,10 +76,8 @@ void Menu::process_event_menu(HIEvent events, std::shared_ptr<const json> config
     case HIEvent::MOUSE_DOWN:
         for (auto button : buttons)
         {
-            if (button->sprite->getGlobalBounds().intersects(sf::FloatRect(
-                (float)sf::Mouse::getPosition().x,
-                (float)sf::Mouse::getPosition().y, 
-                (float)1, (float)1)))
+            if (button->sprite->getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(*window).x*SCREEN_X_PXSIZE / window->getSize().x,
+                sf::Mouse::getPosition(*window).y*SCREEN_Y_PXSIZE / window->getSize().y)))
             {
                 if (button->function == "play")
                 {
